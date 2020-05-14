@@ -11,6 +11,16 @@ namespace Grades
     {
         static void Main(string[] args)
         {
+
+            GradeBook g1 = new GradeBook();
+            GradeBook g2 = g1;
+
+            g1 = new GradeBook();
+            g1.Name = "Scott's GradeBook";
+            
+            Console.WriteLine(g2.Name);
+
+      
             SpeechSynthesizer synth = new SpeechSynthesizer();
             synth.Speak("Hello! this is the grade programe");
 
@@ -25,7 +35,7 @@ namespace Grades
             Console.WriteLine(stats.LowestGrade);
             book = new GradeBook();
             book.AddGrade(75);
-
+       
         }
     }
 }
