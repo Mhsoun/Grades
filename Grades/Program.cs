@@ -12,30 +12,53 @@ namespace Grades
         static void Main(string[] args)
         {
 
-            GradeBook g1 = new GradeBook();
-            GradeBook g2 = g1;
+            //GradeBook g1 = new GradeBook();
+            //GradeBook g2 = g1;
 
-            g1 = new GradeBook();
-            g1.Name = "Scott's GradeBook";
-            
-            Console.WriteLine(g2.Name);
+            //g1 = new GradeBook();
+            //g1.Name = "Scott's GradeBook";
 
-      
-            SpeechSynthesizer synth = new SpeechSynthesizer();
-            synth.Speak("Hello! this is the grade programe");
+            //Console.WriteLine(g2.Name);
+
+
+            //SpeechSynthesizer synth = new SpeechSynthesizer();
+            //synth.Speak("Hello! this is the grade programe");
 
             GradeBook book = new GradeBook();
+
+
+            book.NameChanged += OnNameChanged;
+       
+
+
+            book.Name = "Mohammad's Grade Book";
+            book.Name = "Grade Book";
             book.AddGrade(91);
             book.AddGrade(78.5f);
             book.AddGrade(59);
 
             GradeStatistics stats = book.ComputeStatistics();
-            Console.WriteLine(stats.AverageGrade);
-            Console.WriteLine(stats.HighestGrade);
-            Console.WriteLine(stats.LowestGrade);
-            book = new GradeBook();
-            book.AddGrade(75);
-       
+            WriteResult("Avarage",stats.AverageGrade);
+            WriteResult("Highest ",(int)stats.HighestGrade);
+            WriteResult("Lowest",stats.LowestGrade);
+            //book = new GradeBook();
+            //book.AddGrade(75);
+
+            Console.ReadLine();
+        }
+
+        static void OnNameChanged(object sender, NameChangedEventArgs args)
+        {
+            Console.WriteLine($"Grade book changing name from {args.ExistingName} to {args.NewName}");
+        }
+
+        static void WriteResult (string description, int result)
+        {
+            Console.WriteLine(description + ": " + result) ;
+        }
+        static void WriteResult(string description, float result)
+        {
+            Console.WriteLine("{0}: {1}", description, result);
         }
     }
 }
